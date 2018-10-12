@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.stringbootbo.mapper.secondMapper.MaketMapper" >
+    <resultMap type="com.example.stringbootbo.bean.Maket" id="resultMap">
+       <id property="shopId" column="maket_id"/>
+        <result property="buildId" column="build_id"/>
+        <result property="floorId" column="floor"/>
+        <result property="x" column="x"/>
+        <result property="y" column="y"/>
+        <result property="poiNo" column="poi_no"/>
+        <result property="maketType" column="maket_type"/>
+        <result property="maketTimeStart" column="maket_time_start"/>
+        <result property="maketTimeEnd" column="maket_time_end"/>
+        <result property="count" column="count"/>
+    </resultMap>
+    <resultMap type="com.example.stringbootbo.bean.MarketingIcon" id="BesultMap">
+        <result property="buildId" column="build_id"/>
+        <result property="floor" column="floor"/>
+        <result property="x" column="x"/>
+        <result property="y" column="y"/>
+        <result property="poiNo" column="poi_no"/>
+        <result property="marketingType" column="maket_type"/>
+    </resultMap>
+    
+    <insert id="insert">
+  	insert into attr_maket(maket_id,build_id, floor, x, y,poi_no,count,maket_type,activityId,couponActivityId,mainInfo)
+               values(#{shopId},#{buildId}, #{floorId},#{x},#{y}, #{poiNo},#{quantity},#{maketType},#{activityId},#{couponActivityId},#{mainInfo})
+    </insert>
+    
+    <update id="deleteAll">
+      	TRUNCATE TABLE attr_maket
+    </update>
+    
+    <select id="selectCount" resultType="java.lang.Integer">
+
+        SELECT
+	count(1)
+   FROM
+	`attr_maket`
+    WHERE
+	maket_id = #{maketId}
+    </select>
+
+    <select id="selectList" resultType="com.example.stringbootbo.bean.MarketingIcon" resultMap="BesultMap">
+        SELECT * FROM `attr_maket` where build_id=#{buildId}
+        AND floor=#{floor}
+        GROUP BY maket_id
+    </select>
+</mapper>

@@ -1,0 +1,11 @@
+2018-10-08 14:02:31,485 INFO (StartupInfoLogger.java:50)- Starting StringbootboApplicationTests on zzc with PID 9344 (started by Administrator in D:\myWorkHome\marketingMap)
+2018-10-08 14:02:31,485 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.0.4.RELEASE, Spring v5.0.8.RELEASE
+2018-10-08 14:02:31,501 INFO (SpringApplication.java:662)- No active profile set, falling back to default profiles: default
+2018-10-08 14:02:40,544 INFO (StartupInfoLogger.java:59)- Started StringbootboApplicationTests in 10.249 seconds (JVM running for 12.58)
+2018-10-08 14:05:19,121 INFO (StartupInfoLogger.java:50)- Starting StringbootboApplicationTests on zzc with PID 9204 (started by Administrator in D:\myWorkHome\marketingMap)
+2018-10-08 14:05:19,121 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.0.4.RELEASE, Spring v5.0.8.RELEASE
+2018-10-08 14:05:19,121 INFO (SpringApplication.java:662)- No active profile set, falling back to default profiles: default
+2018-10-08 14:05:26,927 INFO (StartupInfoLogger.java:59)- Started StringbootboApplicationTests in 8.657 seconds (JVM running for 10.094)
+2018-10-08 14:05:50,541 INFO (StartupInfoLogger.java:50)- Starting StringbootboApplication on zzc with PID 2760 (D:\myWorkHome\marketingMap\target\classes started by Administrator in D:\myWorkHome\marketingMap)
+2018-10-08 14:05:50,541 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.0.4.RELEASE, Spring v5.0.8.RELEASE
+2018-10-08 14:05:50,541 INFO (SpringApplication.java:662)- No active profile set, falling back to default profiles: default

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.stringbootbo.mapper.secondMapper.BrandsMapper" >
+    <resultMap type="com.example.stringbootbo.bean.Brands" id="resultMap">
+            <result property="buildId" column="build_id"/>
+            <result property="poiId" column="id"/>            
+            <result property="floor" column="floor"/>
+            <result property="x" column="x"/>
+            <result property="icon" column="icon_url"/>
+            <result property="y" column="y"/>
+            <result property="poiNo" column="poi_no"/>
+            <result property="searchCount" column="search_count"/>
+            <result property="poiName" column="poi_name"/>
+            <result property="marketingType" column="market_type"/>
+            <result property="ShopId" column="attr_market_id"/>
+    </resultMap>
+    <resultMap type="com.example.stringbootbo.bean.Brands" id="resultMap1">
+        <result property="buildId" column="build_id"/>
+        <result property="floorId" column="floor"/>
+        <result property="x" column="x"/>
+        <result property="imgLogoUrl" column="icon_url"/>
+        <result property="y" column="y"/>
+        <result property="poiNo" column="poi_no"/>
+        <result property="shopName" column="poi_name"/>
+        <result property="shopId" column="attr_market_id"/>
+    </resultMap>
+
+
+    <select id="getBrandsList" parameterType="com.example.stringbootbo.bean.Brands" resultMap="resultMap">
+        SELECT *, (CASE WHEN market_type &gt; 0 THEN 10000 + search_count WHEN market_type &lt;= 0 THEN search_count END)  AS ord FROM h5_hot_poi WHERE build_id=#{buildId}  ORDER BY ord DESC LIMIT 0, #{num}
+	</select>
+    <select id="getBrands" parameterType="com.example.stringbootbo.bean.Brands" resultMap="resultMap">
+       select * from h5_hot_poi where attr_market_id != ''
+	</select>
+	
+	<select id="getMaketBrands" resultMap="resultMap">
+        SELECT * FROM `h5_hot_poi` where market_type > 0 AND id IN
+        <foreach collection="ids" open="(" separator="," close=")" item="id">
+            #{id}
+        </foreach>
+	</select>
+
+    <insert id="insert">
+      insert into h5_hot_poi(id,build_id,floor,x,y,poi_no,icon_url,poi_name,attr_market_id,market_type,search_count,mobile,poiType,floor_alias,type_name,open_hours)
+               values(#{id},#{buildId},#{floorId},#{x},#{y},#{poiNo},#{imgLogoUrl},#{shopName},#{shopId},#{marketType},#{count},#{mobile},#{poiType},#{floorAlias},#{typeName},#{openTime})
+    </insert>
+
+    <update id="update">
+        update h5_hot_poi
+        <set>
+            <if test="searchCount != null">search_count=#{searchCount},</if>
+            <if test="marketingType != null">market_type=#{marketingType},</if>
+        </set>
+        where attr_market_id=#{ShopId}
+    </update>
+    
+    <update id="updateCount" parameterType="java.lang.String">
+        update h5_hot_poi set search_count = search_count + 1 where id=#{id}
+    </update>
+</mapper>

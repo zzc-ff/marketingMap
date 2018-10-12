@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.stringbootbo.mapper.firstMapper.PoiMapper" >
+    <resultMap type="com.example.stringbootbo.bean.Poi" id="resultMap">
+        <result property="buildId" column="id_build"/>
+        <result property="floor" column="floor"/>
+        <result property="poiNo" column="poi_no"/>
+        <result property="x" column="x_coord"/>
+        <result property="y" column="y_coord"/>
+        <result property="dist" column="dst"/>
+        <result property="keywords" column="search_out"/>
+        <result property="poiName" column="name_chinese"/>
+    </resultMap>
+    <resultMap type="com.example.stringbootbo.bean.Shop" id="resultMap1">
+        <result property="buildId" column="id_build"/>
+        <result property="floorId" column="floor"/>
+        <result property="poiNo" column="poi_no"/>
+        <result property="x" column="x_coord"/>
+        <result property="y" column="y_coord"/>
+        <result property="shopName" column="name_chinese"/>
+        <result property="floorAlias" column="floor_alias"/>
+        <result property="typeName" column="type_name"/>
+    </resultMap>
+
+
+    <select id="searchkeys"  parameterType="java.util.Map"  resultMap="resultMap">
+        (select *, sqrt(pow((x_coord -#{x}),2) + pow((y_coord -#{y}),2)) as dst  from ${tableName} where id_build= #{buildId} and floor = #{floor} AND name_chinese LIKE "%"#{keywords}"%" OR search_out LIKE "%"#{keywords}"%")
+		UNION
+		(select *, sqrt(pow((x_coord -#{x}),2) + pow((y_coord -#{y}),2)) + 20 as dst  from ${tableName} where id_build= #{buildId} and floor &lt;&gt; #{floor} AND name_chinese LIKE "%"#{keywords}"%" OR search_out LIKE "%"#{keywords}"%")      
+    </select>
+    
+    <select id="searchKeysNoCoord"  parameterType="java.util.Map"  resultMap="resultMap">
+        select * from ${tableName} where id_build= #{buildId} AND name_chinese LIKE "%"#{keywords}"%" OR search_out LIKE "%"#{keywords}"%"
+    </select>
+
+    <select id="findPoiList"  parameterType="java.util.Map"  resultMap="resultMap1">
+ SELECT
+	po.id_build,
+	po.floor,
+	po.poi_no,
+	po.x_coord,
+	po.y_coord,
+	po.name_chinese,
+	type.type_name,
+	floor.floor_alias
+FROM
+	${tableName} po,
+	poi_type type,
+	( SELECT * FROM floor WHERE  id_build=#{buildId} GROUP BY floor ) floor
+WHERE
+	type.type_id = LEFT ( po.two_class, 4 )
+	AND po.floor = floor.floor
+	AND po.style = '5'
+    </select>
+   </mapper>

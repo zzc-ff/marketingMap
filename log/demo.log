@@ -1,0 +1,5 @@
+2018-10-10 11:36:26,920 INFO (StartupInfoLogger.java:50)- Starting StringbootboApplication on zzc with PID 9748 (D:\myWorkHome\marketingMap\target\classes started by Administrator in D:\myWorkHome\marketingMap)
+2018-10-10 11:36:26,935 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.0.4.RELEASE, Spring v5.0.8.RELEASE
+2018-10-10 11:36:26,935 INFO (SpringApplication.java:662)- No active profile set, falling back to default profiles: default
+2018-10-10 11:36:32,319 INFO (StartupInfoLogger.java:59)- Started StringbootboApplication in 6.537 seconds (JVM running for 8.707)
+2018-10-10 11:41:56,507 ERROR (BrandsController.java:35)- ERR参数错误Brands(poiId=null, key=null, buildId=null, floor=null, x=0.0, y=0.0, poiName=null, poiNo=null, marketingType=null, searchCount=null, Icon=null, num=null, ShopId=null, mobile=null)
